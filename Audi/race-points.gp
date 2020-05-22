@@ -2,7 +2,7 @@
 set xlabel "Location"
 set ylabel "Points"
 set grid xtics,ytics
-set terminal svg 
+set terminal svg
 set output "team-points.svg"
 plot [][-1:] "race-points.dat" u 2:xticlabels(1) t "Points at Location" w lp,"race-points-agg.dat" u 2:xticlabels(1) t "Points aggregated" w lp
 set terminal qt
