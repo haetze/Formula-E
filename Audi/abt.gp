@@ -2,9 +2,10 @@
 set xlabel "Location"
 set ylabel "Positiondelta (higher is better)"
 set grid xtics,ytics
+set xzeroaxis
 set terminal svg
 set output "abt-positiondelta.svg"
-plot "abt.dat" u 14:xticlabels(1) t "Positiondelta" w lp, 0 w l lt rgb "black" t ""
+plot "abt.dat" u ($0):14:xtic(1) t "Positiondelta" w lp
 set terminal qt
 set output
 # EOF
