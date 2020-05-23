@@ -19,3 +19,13 @@ abt-positiondelta.svg: abt.dat abt.gp
 
 di-Grassi-positiondelta.svg: di-Grassi.dat di-Grassi.gp
 	./di-Grassi.gp
+
+
+clean:
+	rm *.dat
+	rm *.svg
+
+
+publish:
+	git commit -m "$(MSG)" -a
+	git push
