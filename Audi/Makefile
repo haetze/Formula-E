@@ -22,7 +22,7 @@ di-Grassi-positiondelta.svg: di-Grassi.dat di-Grassi.gp
 
 
 clean:
-	rm *.dat
+	rm race-points-agg.dat race-points.dat abt.dat di-Grassi.dat
 	rm *.svg
 
 
