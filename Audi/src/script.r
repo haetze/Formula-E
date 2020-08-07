@@ -1,7 +1,7 @@
 tab <- read.table("data/team.dat", sep="", header=TRUE)
 abt <- tab[tab[["Driver"]] == "Daniel Abt",!(names(tab) %in% c("Driver"))]
-di.Grassi<- tab[tab[["Driver"]] == "Lucas di Grassi",!(names(tab) %in% c("Driver"))]
-
+di.Grassi <- tab[tab[["Driver"]] == "Lucas di Grassi",!(names(tab) %in% c("Driver"))]
+rast <-tab[tab[["Driver"]] == "Rene Rast",!(names(tab) %in% c("Driver"))]
 
 sum.for.race.day <- aggregate(tab[c("PositionP", "Pole", "Fastes.Lap.Qualifying", "Fastes.Lap.Race")], by = list(tab[["Date"]]), sum)
 location.for.race.day <- aggregate(tab[c("Location")], by = list(tab[["Date"]]), function(x) x[1])
@@ -36,10 +36,15 @@ write.table(x = sum.for.race.agg,
 
 
 abt[["Positiondelta"]] = abt[["Startingposition"]] - abt[["Position"]]
+rast[["Positiondelta"]] = rast[["Startingposition"]] - rast[["Position"]]
 di.Grassi[["Positiondelta"]] = di.Grassi[["Startingposition"]] - di.Grassi[["Position"]]
 
 write.table(x = abt,
             file = "data/abt.dat",
+            row.names = FALSE)
+
+write.table(x = rast,
+            file = "data/rast.dat",
             row.names = FALSE)
 
 write.table(x = di.Grassi,
