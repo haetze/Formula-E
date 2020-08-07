@@ -3,27 +3,29 @@
 ## Author: richard.stewing@udo.edu
 
 
-all: race-points-agg.dat race-points.dat abt.dat di-Grassi.dat team-points.svg
-all: abt-positiondelta.svg di-Grassi-positiondelta.svg
+all: data/race-points-agg.dat data/race-points.dat data/abt.dat data/di-Grassi.dat img/team-points.svg
+all: img/abt-positiondelta.svg img/di-Grassi-positiondelta.svg
 
 
-race-points-agg.dat race-points.dat abt.dat di-Grassi.dat: team.dat
-	Rscript script.r
+data/race-points-agg.dat data/race-points.dat data/abt.dat di-Grassi.dat: data/team.dat
+	Rscript src/script.r
+img:
+	mkdir -p img
 
-team-points.svg: race-points-agg.dat race-points.dat race-points.gp
-	./race-points.gp
+img/team-points.svg: data/race-points-agg.dat data/race-points.dat src/race-points.gp img
+	./src/race-points.gp
 
 
-abt-positiondelta.svg: abt.dat abt.gp
-	./abt.gp
+img/abt-positiondelta.svg: data/abt.dat src/abt.gp img
+	./src/abt.gp
 
-di-Grassi-positiondelta.svg: di-Grassi.dat di-Grassi.gp
-	./di-Grassi.gp
+img/di-Grassi-positiondelta.svg: data/di-Grassi.dat src/di-Grassi.gp img
+	./src/di-Grassi.gp
 
 
 clean:
-	rm race-points-agg.dat race-points.dat abt.dat di-Grassi.dat
-	rm *.svg
+	rm data/race-points-agg.dat data/race-points.dat data/abt.dat data/di-Grassi.dat
+	rm img/*.svg
 
 
 publish:
