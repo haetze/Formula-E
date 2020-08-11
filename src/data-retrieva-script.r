@@ -109,6 +109,19 @@ write.data <- function(race) {
     if(file.existance == -1) {
         write.table(race, file.path)
     }
+
+    complete.file.path <- "data/complete.dat"
+    file.existance <- file.access(complete.file.path)
+    if(file.existance == -1) {
+        write.table(race, complete.file.path)
+    } else if(file.existance == 0) {
+        from.storage <- read.table(complete.file.path)
+        rid.exists <- any(race[["RID"]] == from.storage[["RID"]])
+        if(!rid.exists){
+            combined <- rbind(from.storage, race)
+            write.table(combined, complete.file.path)
+        }
+    }
     
     for(i in seq(1,number.of.lines)) {
         line <- race[i,]

@@ -4,6 +4,8 @@
 
 # First Race Season 2019/2020
 RACE-IDS := 97 98 100 101 102 116 117 118 119
+DATA-FILES := $(patsubst %,data/%.dat, $(RACE-IDS))
+
 
 doc:
 	@echo "Available Targets:"
@@ -13,12 +15,27 @@ doc:
 	@echo "    Examples:"
 	@echo "      ''make data/97.dat''"
 	@echo "      ''make data/117.dat''"
+	@echo "  all:"
+	@echo "    Description: Downloads all data files. Don't use with -j flag."
+	@echo "    Examples:"
+	@echo "      ''make all''"
+	@echo "  clean:"
+	@echo "    Description: Removes data/ directory"
+	@echo "    Examples:"
+	@echo "      ''make clean''"
 
 
+all: $(DATA-FILES)
 
-data/%.dat: src/data-retrieva-script.r
-	@echo "+========================================+"
+clean:
+	rm -rf data
+
+data:
+	@mkdir -p data
+
+data/%.dat: src/data-retrieva-script.r data
+	@echo "+==============================================================================+"
 	@echo "  Requesting Race data with ID $(basename $(@F))"
-	@echo "+========================================+"
+	@echo "+==============================================================================+"
 	./src/data-retrieva-script.r $(basename $(@F))
 
